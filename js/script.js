@@ -56,35 +56,25 @@ const images = [
     },
 ];
 
-/*
-__steps__situazione di base su cui andrò a lavorare
-0_ragiono: ho diversi costrutti a disposizione, per ciclare gli oggetti dell'array nel testo.
-sicuramente
-1_: dichiarare variabili globali.
-2. ...
-3_: ...
-
-*/
-
+//dichiaro variabile globale
 const carousel = document.getElementById('carousel-list');
+//costante nuova per collegare il thumbnail
+const thumbnails = document.querySelector('.thumbnails-list');
 
-let imagesDatas = '';
+//variabile flag per stamparci ora elementi del mio array di oggetti
+let carouselElement = '';
+//costruisco nuovamente flag per differenziare le due, non riuscendo a gestire __anche__ la lista nella nodelist
+let thumbElement = '';
 
-//
-// images.forEach((element, index, array) => {
-
-//     imagesDatas += `${array}`
-//     carousel.innerHTML = `<!-- <div class="active"><img src="${array.url}" alt="${array.title}"></div>
-//     -->`
-// })
-/*mia stringa vecchia
-  <!-- <div class="active"><img src="img/01.jpg" alt="carousel-landscape"></div>
-                    <div><img src="img/04.jpg" alt="carousel-landscape"></div>
-                    <div><img src="img/08.jpg" alt="carousel-landscape"></div>
-                    <div><img src="img/09.jpg" alt="carousel-landscape"></div>
-                    <div><img src="img/10.jpg" alt="carousel-landscape"></div> -->*/
-// carousel.innerHTML = carouselElement;
-// thumbnails.innerHTML = thumbElement;
+//generazione dinamica immagini nella lista 
+for (let i = 0; i < images.length; i++) {
+    //inserisco nella variabile flag ad ogni giro del ciclo la stringa di codice che metterò nell' ul
+    carouselElement += `<li><img src="${images[i].url}" alt="landscape-${i + 1}"></li>`
+    //inserisco nuovamente nella flag ad ogni ciclo le mie immagini ma senza '<li></li>'
+    thumbElement += `<img src="${images[i].url}" alt="landscape-${i + 1}">`
+}
+carousel.innerHTML = carouselElement;
+thumbnails.innerHTML = thumbElement;
 
 // recupero li dal DOM
 const listItemsImages = document.querySelectorAll('#carousel-list li');
