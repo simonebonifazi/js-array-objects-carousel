@@ -40,11 +40,28 @@ ul li {
 
 }
 
-ul li {
+#carousel-list figure {
+    height: 100%;
+    position: relative;
+
     display: none;
+
 }
 
-.active {
+#carousel-list figcaption {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
+    color: #fff;
+    text-shadow: 0 0 8px #d3d3d3;
+
+    text-align: right;
+
+}
+
+
+#carousel-list .active {
     display: block;
 }
 
