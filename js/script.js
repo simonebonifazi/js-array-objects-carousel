@@ -1,17 +1,4 @@
 /*
-Dato un array di oggetti letterali con:
-- url dell’immagine
-- titolo
-- descrizione
-Creare un carosello ispirandosi alla foto allegata. Potete anche usare come base il carosello dell'esercizio precedente
-
-## Milestone 1:
-e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
-Al click dell’utente sulle frecce verso sinistra o destra, l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
-## Milestone 2:
-Aggiungere il ciclo infinito del carosello. Ovvero se la miniatura attiva è la prima e l’utente clicca la freccia verso destra,
-la miniatura che deve attivarsi sarà l’ultima e viceversa per l’ultima miniatura se l’utente clicca la freccia verso sinistra.
-
 ## BONUS 1:
 Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 ## BONUS 2:
@@ -74,7 +61,7 @@ images.forEach(pic => {
     //creo costante d'"appoggio" dove ci sono i tratti coincidenti delle due stringhe
     const imgs = `<img src="${url}" alt="${title}">`;
     //inserisco nella variabile flag ad ogni giro del ciclo la stringa di codice che metterò nell' ul
-    thumbElement += ` ${imgs} `;
+    thumbElement += ` <li> ${imgs} </li>`;
 
     //preparo figure per carousel
     carouselElement += `
