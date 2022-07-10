@@ -20,7 +20,13 @@ Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi)
 Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 */
-//array di base
+//dichiaro variabile globali
+const carousel = document.getElementById('carousel-list');
+//costante nuova per collegare il thumbnail
+const thumbnails = document.querySelector('.thumbnails-list');
+
+
+//array di partenza
 const images = [
     {
         url: 'http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg',
@@ -56,28 +62,43 @@ const images = [
     },
 ];
 
-//dichiaro variabile globale
-const carousel = document.getElementById('carousel-list');
-//costante nuova per collegare il thumbnail
-const thumbnails = document.querySelector('.thumbnails-list');
 
 //variabile flag per stamparci ora elementi del mio array di oggetti
 let carouselElement = '';
 //costruisco nuovamente flag per differenziare le due, non riuscendo a gestire __anche__ la lista nella nodelist
 let thumbElement = '';
 
-//generazione dinamica immagini nella lista 
-for (let i = 0; i < images.length; i++) {
+//generazione dinamica immagini nella lista REFACTURED
+images.forEach(pic => {
+    const { url, title, description } = pic
+    //creo costante d'"appoggio" dove ci sono i tratti coincidenti delle due stringhe
+    const imgs = `<img src="${url}" alt="${title}">`;
     //inserisco nella variabile flag ad ogni giro del ciclo la stringa di codice che metterò nell' ul
-    carouselElement += `<li><img src="${images[i].url}" alt="landscape-${i + 1}"></li>`
-    //inserisco nuovamente nella flag ad ogni ciclo le mie immagini ma senza '<li></li>'
-    thumbElement += `<img src="${images[i].url}" alt="landscape-${i + 1}">`
-}
+    thumbElement += ` ${imgs} `;
+
+    //preparo figure per carousel
+    carouselElement += `
+    <li>
+    <figure>
+        ${imgs}
+             <figcaption>
+        <h3> ${title}</h3>
+        <h5> ${description}
+        </h5>
+             </figcaption>
+        </figure>
+    </li>
+    `;
+})
+// for (let i = 0; i < images.length; i++) {
+//     //inserisco nuovamente nella flag ad ogni ciclo le mie immagini ma senza '<li></li>'
+//     thumbElement += `<img src="${images[i].url}" alt="landscape-${i + 1}">`
+// }
 carousel.innerHTML = carouselElement;
 thumbnails.innerHTML = thumbElement;
 
 // recupero li dal DOM
-const listItemsImages = document.querySelectorAll('#carousel-list li');
+const listItemsImages = document.querySelectorAll('#carousel-list figure');
 const thumbListImages = document.querySelectorAll('.thumbnails-list img');
 
 // creo variabile per monitorare li a cui darò/leverò classe active
